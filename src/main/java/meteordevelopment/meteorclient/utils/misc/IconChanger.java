@@ -29,11 +29,13 @@ public class IconChanger {
     public static void setIcon(Identifier iconPath) {
         if (iconPath == null) { // If the default Minecraft icon should be used
             try {
+				String versionId = SharedConstants.getGameVersion().getId(); // e.g., "1.21" or "24w40a"
+				boolean isSnapshot = !versionId.matches("^\\d+\\.\\d+(\\.\\d+)?$"); // true if contains letters (snapshot/pre-release)
                 //Default Minecraft method for setting the windows' icon
-                mc.getWindow().setIcon(
-                    mc.getDefaultResourcePack(),
-                    SharedConstants.getGameVersion().isStableRelease() ? Icons.RELEASE : Icons.SNAPSHOT
-                );
+				mc.getWindow().setIcon(
+					mc.getDefaultResourcePack(),
+					isSnapshot ? Icons.SNAPSHOT : Icons.RELEASE
+				);
             } catch (IOException e) {
                 MeteorClient.LOG.error("Failed to set icon", e);
             }
