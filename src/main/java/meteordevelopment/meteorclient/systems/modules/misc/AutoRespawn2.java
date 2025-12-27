@@ -21,7 +21,7 @@ import meteordevelopment.orbit.EventHandler;
 import meteordevelopment.orbit.EventPriority;
 import net.minecraft.client.gui.screen.DeathScreen;
 
-public class AutoRespawn extends Module {
+public class AutoRespawn2 extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
 
     public final Setting<Boolean> sendRespawnMessage = sgGeneral.add(new BoolSetting.Builder()
@@ -52,8 +52,8 @@ public class AutoRespawn extends Module {
     private int respawnTimer;
     private boolean respawning = false;
 
-    public AutoRespawn() {
-        super(Categories.Player, "auto-respawn", "Automatically respawns after death.");
+    public AutoRespawn2() {
+        super(Categories.Player, "auto-respawn2", "Automatically respawns after death.");
     }
 
     @EventHandler(priority = EventPriority.HIGH)
