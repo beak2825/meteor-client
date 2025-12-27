@@ -26,4 +26,4 @@
 - StorageESP Crash Removed.
 - .vclip fall dmg removed.
 - BlockESP with NBT Property filtering
-- 6
+- Added BetterLocator module. (display player heads instead of dots, show names, player dist + directions)
