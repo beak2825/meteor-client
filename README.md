@@ -22,5 +22,5 @@
 
 # Whats New?
 - PacketLogger
-- 2
+- AutoFish now has randomness (less detectable)
 - 3
