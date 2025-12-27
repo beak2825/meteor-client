@@ -8,6 +8,7 @@ on:
     branches:
       - master
     paths:                      # only run if THESE paths change [web:1][web:2]
+      - 'gradle/**' 
       - 'src/**'                # folder: src/ [web:1][web:8]
       - '.github/**'            # folder: .github/ (includes workflows & build scripts) [web:1][web:8]
       - 'gradlew'               # file: gradlew [web:1][web:2]
