@@ -1,5 +1,4 @@
 name: Build
-
 concurrency:
   group: "build"
   cancel-in-progress: false
@@ -8,11 +7,18 @@ on:
   push:
     branches:
       - master
+    paths:                      # only run if THESE paths change [web:1][web:2]
+      - 'src/**'                # folder: src/ [web:1][web:8]
+      - '.github/**'            # folder: .github/ (includes workflows & build scripts) [web:1][web:8]
+      - 'gradlew'               # file: gradlew [web:1][web:2]
+      - 'gradle.properties'     # file: gradle.properties [web:1][web:2]
+      - 'build.gradle.kts'      # file: build.gradle.kts [web:1][web:2]
+      - 'gradlew.bat'           # file: gradlew.bat [web:1][web:2]
+      - 'settings.gradle.kts'   # file: settings.gradle.kts [web:1][web:2]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -41,4 +47,7 @@ jobs:
           npm run --silent get_number >> $GITHUB_OUTPUT
 
       - name: Build
-        run: ./gradlew build -Pcommit=${{ github.sha }} -Pbuild_number=${{ steps.build-number.outputs.number }}
+        run: ./gradlew build \
+          -Pcommit=${{ github.sha }} \
+          -Pbuildnumber=${{ github.sha }} \
+          -Pbuild_number=${{ steps.build-number.outputs.number }}

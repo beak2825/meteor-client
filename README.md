@@ -20,22 +20,33 @@
     <img src="https://img.shields.io/endpoint?url=https://ghloc.vercel.app/api/beak2825/meteor-client/badge?filter=.java$&label=lines%20of%20code&color=blue" alt="GitHub lines of code"/>
 </div>
 
-# New Modules
+
+# Whats New?
+##### New Modules
 - PacketLogger Module
 - Added BetterLocator module. (display player heads instead of dots, show names, player dist + directions)
 - NoMissDelay Module (Will cancel an attack if it will miss, so you can crit)
 - No-Jump-Delay Module
 
 
-# Added to Existing Modules
+##### Added to Existing Modules
 - AutoFish now has randomness (less detectable)
 - BlockESP with NBT Property filtering
 - KillAura now lets you change if you want to attack players with creative mode or not.
-# Needed/Bug Fixes
+##### Needed/Bug Fixes
 - StorageESP Crash Removed.
 - .vclip fall dmg removed.
 - Altening Alts now work...
 
+##### Regarding this Repository
+- New commits will not automatically trigger the build workflow,
+- It instead will only trigger IF
+- folder has new commits: src/, .github/
+- these files change: gradlew, gradle.properties, build.gradle.kts, gradlew.bat, settings.gradle.kts
+
+
+
+
+
 # To do:
-- Make subtexts of modules that were changed, and put the changes inside them, instead of all inside Whats New?
-- Make a BIGGER Whats New, and put the new modules, added to existing modules, ..., inside them.
+- Nothing
