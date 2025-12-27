@@ -1,19 +1,20 @@
 {
   "schemaVersion": 1,
-  "name": "Meteor Client",
+  "name": "Meteor Extras",
   "id": "meteor-client",
   "version": "${version}",
-  "description": "Based utility mod.",
+  "description": "Meteor client, but extra modules!, Standalone, do not use with normal meteor client.",
   "authors": [
     "MineGame159",
     "squidoodly",
-    "seasnail"
+    "seasnail",
+    "beak2825"
   ],
   "contact": {
     "homepage": "https://meteorclient.com",
     "issues": "https://github.com/MeteorDevelopment/meteor-client/issues",
     "sources": "https://github.com/MeteorDevelopment/meteor-client",
-    "discord": "https://meteorclient.com/discord"
+    "discord": "https://discord.com/users/1375867869329489930"
   },
   "license": "GPL-3.0",
   "icon": "assets/meteor-client/icon.png",
@@ -41,7 +42,7 @@
     "meteor-client:commit": "${commit}",
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://meteorclient.com/discord"
+        "modmenu.discord": "https://discord.com/users/1375867869329489930"
       }
     }
   },
