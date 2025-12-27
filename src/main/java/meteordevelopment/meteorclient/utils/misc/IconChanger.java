@@ -32,7 +32,7 @@ public class IconChanger {
                 //Default Minecraft method for setting the windows' icon
                 mc.getWindow().setIcon(
                     mc.getDefaultResourcePack(),
-                    SharedConstants.getGameVersion().isStable() ? Icons.RELEASE : Icons.SNAPSHOT
+                    SharedConstants.getGameVersion().isStableRelease() ? Icons.RELEASE : Icons.SNAPSHOT
                 );
             } catch (IOException e) {
                 MeteorClient.LOG.error("Failed to set icon", e);
