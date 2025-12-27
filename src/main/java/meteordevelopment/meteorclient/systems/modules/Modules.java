@@ -434,7 +434,7 @@ public class Modules extends System<Modules> {
         add(new AutoGap());
         add(new AutoMend());
         add(new AutoReplenish());
-        add(new AutoRespawn());
+        add(new AutoRespawn2());
         add(new AutoTool());
         add(new BreakDelay());
         add(new ChestSwap());
