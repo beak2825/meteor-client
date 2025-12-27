@@ -11,6 +11,7 @@ import baritone.api.utils.BetterBlockPos;
 import meteordevelopment.meteorclient.events.meteor.KeyEvent;
 import meteordevelopment.meteorclient.events.meteor.MouseClickEvent;
 import meteordevelopment.meteorclient.events.render.Render3DEvent;
+import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.renderer.ShapeMode;
 import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.modules.Categories;
@@ -20,6 +21,7 @@ import meteordevelopment.meteorclient.utils.misc.input.KeyAction;
 import meteordevelopment.meteorclient.utils.render.color.SettingColor;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.item.ItemStack;
 import org.lwjgl.glfw.GLFW;
 
 public class Excavator extends Module {
@@ -50,6 +52,13 @@ public class Excavator extends Module {
         .build()
     );
 
+    private final Setting<Boolean> disableLowDura = sgGeneral.add(new BoolSetting.Builder()
+        .name("disable-low-dura")
+        .description("Disable the module when your main hand tool has < 100 durability to prevent it from breaking.")
+        .defaultValue(false)
+        .build()
+    );
+
     // Rendering
     private final Setting<ShapeMode> shapeMode = sgRendering.add(new EnumSetting.Builder<ShapeMode>()
         .name("shape-mode")
@@ -75,6 +84,7 @@ public class Excavator extends Module {
     private enum Status {
         SEL_START,
         SEL_END,
+		READY_TO_WORK, // new state
         WORKING
     }
 
@@ -90,6 +100,30 @@ public class Excavator extends Module {
         baritone.getSelectionManager().removeSelection(baritone.getSelectionManager().getLastSelection());
         if (baritone.getBuilderProcess().isActive()) baritone.getCommandManager().execute("stop");
         status = Status.SEL_START;
+    }
+
+    @EventHandler
+    private void onTick(TickEvent.Post event) {
+        if (disableLowDura.get()) {
+            if (isToolLowDurability()) {
+                info("Tool durability is below 100, stopping Excavator to prevent breaking.");
+                toggle();
+                return;
+            }
+        }
+
+        if (status == Status.READY_TO_WORK && !baritone.getBuilderProcess().isActive()) {
+            baritone.getBuilderProcess().clearArea(start, end);
+            status = Status.WORKING;
+        }
+    }
+
+    private boolean isToolLowDurability() {
+        ItemStack mainHandStack = mc.player.getMainHandStack();
+        if (mainHandStack.isEmpty() || !mainHandStack.isDamageable()) {
+            return false;
+        }
+        return mainHandStack.getMaxDamage() - mainHandStack.getDamage() < 100;
     }
 
     @EventHandler
@@ -119,12 +153,11 @@ public class Excavator extends Module {
             }
         } else if (status == Status.SEL_END) {
             end = BetterBlockPos.from(result.getBlockPos());
-            status = Status.WORKING;
+            status = Status.READY_TO_WORK;
             if (logSelection.get()) {
                 info("End corner set: (%d, %d, %d)".formatted(end.getX(), end.getY(), end.getZ()));
             }
             baritone.getSelectionManager().addSelection(start, end);
-            baritone.getBuilderProcess().clearArea(start, end);
         }
     }
 
@@ -133,11 +166,17 @@ public class Excavator extends Module {
         if (status == Status.SEL_START || status == Status.SEL_END) {
             if (!(mc.crosshairTarget instanceof BlockHitResult result)) return;
             event.renderer.box(result.getBlockPos(), sideColor.get(), lineColor.get(), shapeMode.get(), 0);
-        } else if (status == Status.WORKING && !baritone.getBuilderProcess().isActive()) {
-            if (keepActive.get()) {
+        } else if (status == Status.WORKING) {
+            if (!baritone.getBuilderProcess().isActive()) {
                 baritone.getSelectionManager().removeSelection(baritone.getSelectionManager().getLastSelection());
                 status = Status.SEL_START;
             } else toggle();
+                if (keepActive.get()) {
+                    status = Status.SEL_START;
+                } else {
+                    toggle();
+                }
+            }
         }
     }
 }

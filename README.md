@@ -30,9 +30,10 @@
 
 
 ##### Added to Existing Modules
-- AutoFish now has randomness (less detectable)
-- BlockESP with NBT Property filtering
-- KillAura now lets you change if you want to attack players with creative mode or not.
+- Excavator: Option to pause if low durability
+- AutoFish: Randomness (less detectable)
+- BlockESP: with NBT Property filtering
+- KillAura: Option to attack creative players
 ##### Needed/Bug Fixes
 - StorageESP Crash Removed.
 - .vclip fall dmg removed.
