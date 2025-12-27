@@ -5,10 +5,12 @@
 
 <h1 align="center">Meteor Extras</h1>
 <p align="center">Meteor client, but added extra modules.</p>
+<p align="center">By MC: parkourmaniac, GIT: beak2825, DISCORD: jarivizero</p>
 
 <div align="center">
     <a href="https://discord.gg/bBGQZvd"><img src="https://img.shields.io/discord/689197705683140636?logo=discord" alt="Discord"/></a>
     <br>
+    <img src="https://komarev.com/ghpvc/?username=beak2825-meteor-extras&label=Repo+Views" alt="Repo Views"/>
     <img src="https://img.shields.io/github/last-commit/beak2825/meteor-client" alt="GitHub last commit"/>
     <img src="https://img.shields.io/github/commit-activity/w/beak2825/meteor-client" alt="GitHub commit activity"/>
     <img src="https://img.shields.io/github/contributors/beak2825/meteor-client" alt="GitHub contributors"/>
