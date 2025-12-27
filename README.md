@@ -6,6 +6,7 @@
 <h1 align="center">Meteor Extras</h1>
 <p align="center">Meteor client, but added extra modules.</p>
 <p align="center">By MC: parkourmaniac, GIT: beak2825, DISCORD: jarivizero</p>
+<p align="center">Don't bother coding them yourself ;)</p>
 
 <div align="center">
     <a href="https://discord.gg/bBGQZvd"><img src="https://img.shields.io/discord/689197705683140636?logo=discord" alt="Discord"/></a>
@@ -20,6 +21,6 @@
 </div>
 
 # Whats New?
-- 1
+- PacketLogger
 - 2
 - 3
