@@ -2,6 +2,8 @@
  * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
  * Copyright (c) Meteor Development.
  */
+/* VCLIP Fall DMG Removed Original Code by aisialiiad */
+/* Code parsd by parkourmaniac, GIT: beak2825 */
 
 package meteordevelopment.meteorclient.commands.commands;
 
@@ -52,8 +54,11 @@ public class VClipCommand extends Command {
                     mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.OnGroundOnly(true, mc.player.horizontalCollision));
                 }
                 // Now send the final player move packet
-                mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(mc.player.getX(), mc.player.getY() + blocks, mc.player.getZ(), true, mc.player.horizontalCollision));
-                mc.player.setPosition(mc.player.getX(), mc.player.getY() + blocks, mc.player.getZ());
+                double y = mc.player.getY() + blocks;
+                mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(mc.player.getX(), y, mc.player.getZ(), false, mc.player.horizontalCollision));
+                mc.player.setPosition(mc.player.getX(), y, mc.player.getZ());
+                mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(mc.player.getX(), y + 0.0000000001, mc.player.getZ(), false, mc.player.horizontalCollision)); // we are slightly higher, resets fall distance to 0
+                mc.player.setPosition(mc.player.getX(), y + 0.0000000001, mc.player.getZ());
             }
 
             return SINGLE_SUCCESS;
